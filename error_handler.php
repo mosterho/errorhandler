@@ -13,6 +13,14 @@ class cls_error_handler{
     $this->my_json = file_get_contents("/home/ESIS/dataonly/errorhandler_data/error_handler.json");
     $this->my_json_decoded = json_decode($this->my_json);
     $this->message_defaults = $this->my_json_decoded->{"message_defaults"};
+
+    // Everytime this program is instntiated, run the purge program, using default
+    // retention values.
+    $runthis = '/home/ESIS/errorhandler/trackinglog_purge.php';
+    if(file_exists($runthis)){
+      include $runthis;
+      $wrk_temp_class = new cls_trackinglog_purge();
+    }
   }
 
 
