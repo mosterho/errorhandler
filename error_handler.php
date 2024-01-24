@@ -57,8 +57,11 @@ class cls_error_handler{
   }
 
 
-  function readmessage($arg_whitelist=False){
+  function readmessage($arg_whitelist=False, $arg_reverseorder=true){
     $this->logfile_data = file($this->logfilename);  // "file" is a PHP function to load a text file into an array.
+    if($arg_reverseorder == true){
+      $this->logfile_data = array_reverse($this->logfile_data);
+    }
     // If the argument is false, this will reload the array with only non-whitelisted IPs.
     if($arg_whitelist == False){
       $this->logfile_data = $this->log_parse_whitelist();  // overlay the array with only non-whitelisted IPs.
